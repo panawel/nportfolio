@@ -36,6 +36,15 @@ yarn-error.log*
 # vercel
 .vercel
 
+# raw, uncompressed originals kept locally — never shipped or committed
+/assets/originals
+
+# old local design notes (predate the current light theme), not part of the published repo
+/design-system
+
+# local Claude Code tooling (third-party design-intelligence skill data, not part of the shipped site)
+/.claude/skills
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
