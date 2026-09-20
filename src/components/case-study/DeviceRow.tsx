@@ -1,3 +1,4 @@
+import { Scaled } from "@/components/Scaled";
 import { cn } from "@/lib/cn";
 
 type Kind = "iphone" | "android" | "pixel" | "native" | "browser" | "laptop" | "dex";
@@ -38,6 +39,20 @@ function Phone({ big, notch, delay, wrapper }: { big?: boolean; notch?: boolean;
     </div>
   );
 }
+
+/** How much smaller than drawn the silhouettes are shown (see `Scaled`; not CSS `zoom`, older Safari ignores it). */
+const DEVICE_SCALE = 0.5;
+
+/** Natural size (px) of each silhouette as drawn below, needed to size the scaled box. */
+const SIZES: Record<Kind, [number, number]> = {
+  pixel: [56, 112],
+  iphone: [48, 96],
+  native: [48, 96],
+  android: [152, 96],
+  browser: [128, 80],
+  dex: [136, 82],
+  laptop: [112, 76],
+};
 
 function Silhouette({ kind, i }: { kind: Kind; i: number }) {
   const delay = i * 1.4;
@@ -125,16 +140,17 @@ export function DeviceRow({ devices, className }: { devices: string[]; className
         const kind = kindOf(device);
         return (
           <li key={`${device}-${i}`} className="flex w-fit min-w-16 flex-col items-center gap-3">
-            {/* A fixed-height stage (the tallest silhouette at 50%), bottom aligned, so the labels line up. */}
+            {/* A fixed-height stage (the tallest silhouette at DEVICE_SCALE), bottom aligned, so the labels line up. */}
             <div aria-hidden className="flex h-14 items-end justify-center">
               {kind && (
-                // `zoom` (not a transform) scales the drawing's layout size too, so the tile shrinks with it.
-                <div
-                  className="cs-sway [zoom:0.5]"
-                  style={{ animationDelay: `${i * -1.3}s`, "--screen": i % 2 ? "var(--accent-2)" : "var(--accent)" } as React.CSSProperties}
-                >
-                  <Silhouette kind={kind} i={i} />
-                </div>
+                <Scaled width={SIZES[kind][0]} height={SIZES[kind][1]} scale={DEVICE_SCALE}>
+                  <div
+                    className="cs-sway"
+                    style={{ animationDelay: `${i * -1.3}s`, "--screen": i % 2 ? "var(--accent-2)" : "var(--accent)" } as React.CSSProperties}
+                  >
+                    <Silhouette kind={kind} i={i} />
+                  </div>
+                </Scaled>
               )}
             </div>
             <span className="max-w-[8.5rem] rounded-sm px-1 text-center text-xs font-medium leading-tight text-foreground/80">

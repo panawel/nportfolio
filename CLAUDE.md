@@ -41,6 +41,7 @@ There is no test suite and no single-test command. "Done" means `tsc`, `eslint -
 - Asset names must be lowercase, no spaces (Vercel is case-sensitive, macOS is not). Ad blockers can block URLs containing "trackjs"; that logo is `js-error-monitor.svg`.
 - Images live under `public/images/` by purpose. Raw originals go in git-ignored `assets/originals/` (keep a copy before compressing). Every project's media is already optimized under `public/images/projects/<slug>/` (no raw dump is left in `public`). There is no ffmpeg/Homebrew here; GIFs were turned into MP4 with a small Swift/AVFoundation script.
 - Browser preview pane: animations, `IntersectionObserver` and rAF only advance when a frame is painted (take a small screenshot first); `Reveal` content stays invisible until painted in view; screenshots taken after scrolling can misplace content.
+- Don't scale drawings with CSS `zoom`: older Safari (18.x) ignores it, so the drawings stayed full size and overlapped their labels. Use `src/components/Scaled.tsx` (a `transform: scale()` inside a box of the scaled size; give it the drawing's natural px size). Safari can't be tested here.
 - GitHub/LinkedIn icons are hand-rolled in `components/icons/BrandIcons.tsx` (lucide has no brand icons).
 
 ## Working agreements

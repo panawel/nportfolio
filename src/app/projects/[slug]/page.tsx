@@ -165,7 +165,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 <PopcornHero scale={0.3} className="-my-5 ml-auto lg:hidden" />
               )}
               {project.heroInline && project.heroVisual === "retro-tv" && (
-                <RetroTv scale={0.3} chips={false} className="-my-5 ml-auto lg:hidden" />
+                <RetroTv scale={0.3} chips={false} className="-my-1.5 ml-auto lg:hidden" />
               )}
             </div>
           </Reveal>
@@ -193,7 +193,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               {project.heroVisual === "slot-machine" && <SlotMachine />}
               {project.heroVisual === "popcorn" && <PopcornHero scale={project.heroInline ? 0.7 : 1} />}
               {project.heroVisual === "crm-phone" && <CrmPhone />}
-              {project.heroVisual === "retro-tv" && <RetroTv scale={project.heroInline ? 0.7 : 1} />}
+              {project.heroVisual === "retro-tv" && <RetroTv scale={project.heroInline ? 0.7 : 1} className="mx-auto" />}
               {project.heroVisual === "phones-lock" && <SecurePhones />}
               {project.heroVisual === "balloon-phone" && <BalloonPhone />}
               {project.heroVisual === "shopping-cart" && <ShoppingCartHero />}

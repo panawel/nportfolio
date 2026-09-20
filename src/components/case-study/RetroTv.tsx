@@ -1,5 +1,6 @@
 import { Gamepad2, Play, Sparkle, Star } from "lucide-react";
 import { FloatingIcon } from "@/components/FloatingIcon";
+import { Scaled } from "@/components/Scaled";
 import { TicketRow } from "@/components/TicketRow";
 import { cn } from "@/lib/cn";
 
@@ -45,12 +46,11 @@ function Knob({ delay }: { delay: string }) {
   );
 }
 
-/** `scale` shrinks the whole TV (1 = 208px wide; it uses CSS `zoom`, so its layout size shrinks with it, and the
- *  px steps of the loops scale too). `chips={false}` leaves out the floating icons around it (for the small copy
- *  beside the title on phones). */
+/** `scale` shrinks the whole TV (1 = 208 x 238px, see `Scaled`: a transform inside a box of the scaled size, not CSS
+ *  `zoom`, which older Safari ignores; the px steps of the loops scale with it). `chips={false}` leaves out the
+ *  floating icons around it (for the small copy beside the title on phones). */
 export function RetroTv({ className, scale = 1, chips = true }: { className?: string; scale?: number; chips?: boolean }) {
-  return (
-    <div className={className} style={scale === 1 ? undefined : { zoom: scale }}>
+  const tv = (
     <TicketRow className="relative mx-auto w-[208px]">
       <div aria-hidden>
         {chips && (
@@ -141,6 +141,12 @@ export function RetroTv({ className, scale = 1, chips = true }: { className?: st
         <div className="h-4" />
       </div>
     </TicketRow>
-    </div>
+  );
+
+  if (scale === 1) return <div className={className}>{tv}</div>;
+  return (
+    <Scaled width={208} height={238} scale={scale} className={className}>
+      {tv}
+    </Scaled>
   );
 }
