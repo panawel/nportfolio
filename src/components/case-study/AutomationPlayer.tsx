@@ -219,7 +219,7 @@ export function AutomationPlayer({ examples }: { examples: PreparedExample[] }) 
     <div ref={rootRef} data-open={open} className="mt-6">
       <p className="mb-3 font-mono text-[11px] uppercase leading-relaxed tracking-wide text-foreground/70">
         <span aria-hidden className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle ring-1 ring-foreground" />
-        Automation Example <span className="normal-case tracking-normal text-foreground/50">· real test, names changed · recorded with a test account</span>
+        Code Example <span className="normal-case tracking-normal text-foreground/50">· real test case, names changed · recorded with a test account</span>
       </p>
 
       <AutoHeight>
@@ -423,7 +423,7 @@ function ExecuteButton({ e, onRun, onWarm }: { e: PreparedExample; onRun: () => 
       className="ide-btn ide-breathe relative flex h-7 w-fit items-center overflow-hidden rounded-lg bg-accent px-3.5 font-mono text-[10px] font-bold uppercase tracking-wide text-on-accent sm:h-9 sm:rounded-xl sm:px-5 sm:text-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ide-bg)] active:scale-[0.97]"
     >
       <span aria-hidden className="ide-shine pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-white/40" />
-      Execute {e.title}
+      Run {e.title} Test
     </button>
   );
 }
