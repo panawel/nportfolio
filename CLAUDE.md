@@ -54,4 +54,5 @@ There is no test suite and no single-test command. "Done" means `tsc`, `eslint -
 
 - Design changes: plan first (plan mode + short questions), then build. Small asks: just do them.
 - Commit and push only when explicitly asked. The site lives in the public repo `panawel/nportfolio`; pushing `main` deploys to production on Vercel within about a minute (check the live page afterwards). The old portfolio repo `panawel/Portfolio` must stay untouched. English only. MIT covers code only, not the case-study content, logos or photos.
+- Keep the owner's name out of `README.md` (the owner had it removed from the file's whole git history and asked for it to appear only on the website itself; `LICENSE` and `package.json` still carry it on purpose). Never rewrite or force-push the public history unless explicitly asked; that one time the commit hashes changed and old ones stay reachable on GitHub until support purges them.
 - `README.md` was rewritten for the current light design and deployment (Vercel). `design-system/` is old local notes and is git-ignored (not published).

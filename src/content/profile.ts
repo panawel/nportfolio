@@ -101,7 +101,7 @@ export const heroStats = [
  *  `start` and goes up by one every `HERO_TICK_MS` while the visitor is looking at it. `heroStats`
  *  above stays the real cumulative totals (the social-preview image reads those). */
 export const heroCounters = [
-  { label: "Tests Executed Today", start: 2125 },
+  { label: "Tests Executed Today", start: 217 },
   { label: "Defects Caught Today", start: 44 },
 ];
 
