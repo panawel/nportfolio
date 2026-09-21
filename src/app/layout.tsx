@@ -18,11 +18,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Idan Pnuel - QA Engineer";
+const description =
+  "QA Engineer portfolio - test plans, automation frameworks, API/performance/security testing, and real case studies.";
+
+// The link-preview image itself comes from `opengraph-image.tsx` (Next adds its tag); these keep the title,
+// description and card type consistent for WhatsApp, LinkedIn, X and friends.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Idan Pnuel — QA Engineer",
-  description:
-    "QA Engineer portfolio — test plans, automation frameworks, API/performance/security testing, and real case studies.",
+  title,
+  description,
+  openGraph: { title, description, siteName: title, type: "website" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const personJsonLd = {

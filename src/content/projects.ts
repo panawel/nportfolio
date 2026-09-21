@@ -149,7 +149,7 @@ export const projects: Project[] = [
     name: "Paybox",
     logo: "/images/logos/paybox.png",
     tagline:
-      "Comprehensive QA support for Paybox — a leading mobile payment app with 3.2 billion ILS transferred in 2021.",
+      "Comprehensive QA support for Paybox - a leading mobile payment app with 3.2 billion ILS transferred in 2021.",
     tags: ["FinTech", "Mobile App", "QA Engineering", "API Testing"],
     featured: true,
     context:
@@ -223,7 +223,7 @@ export const projects: Project[] = [
         art: "purchase-flow",
         lockBullet: 1,
         bullets: [
-          "Confirmed vouchers split correctly once amounts exceeded the 1,500 ILS boundary — e.g. 3,000 ILS → two 1,500 ILS vouchers; 3,100 ILS → two 1,500 ILS vouchers + one 100 ILS voucher",
+          "Confirmed vouchers split correctly once amounts exceeded the 1,500 ILS boundary - e.g. 3,000 ILS → two 1,500 ILS vouchers; 3,100 ILS → two 1,500 ILS vouchers + one 100 ILS voucher",
           "Tested the voucher activation code: three incorrect attempts correctly blocks the voucher",
         ],
       },
@@ -258,7 +258,7 @@ export const projects: Project[] = [
     heroVisual: "voucher-phone",
     results: [
       "Enhanced \"Voucher Carousel\" quality and delivered a detailed testing report with all findings to the client.",
-      "Provided support and quick response during the app's maintenance phase — addressing every request until a complete fix was found.",
+      "Provided support and quick response during the app's maintenance phase - addressing every request until a complete fix was found.",
     ],
   },
   {
@@ -327,7 +327,7 @@ export const projects: Project[] = [
       "iOS (iPhone XS through 11+)",
       "Android (Samsung tablets/handsets)",
       "Native wrapper & WebView",
-      "Windows & macOS — Chrome, Safari, Firefox",
+      "Windows & macOS - Chrome, Safari, Firefox",
     ],
     tools: ["Python", "Playwright", "Pytest", "MongoDB", "Redis", "Kibana", "Snowflake"],
     stats: [
@@ -358,7 +358,7 @@ export const projects: Project[] = [
     tags: ["Python", "Appium", "Maestro", "Mobile Automation", "Privacy"],
     featured: false,
     context:
-      "In my first year as a QA engineer, I self-learned the AI-assisted automation tool Maestro and combined it with Appium to automate mobile testing for an internal build of the Signal app — increasing the number of tests completed in the same timeframe alongside manual testing.",
+      "In my first year as a QA engineer, I self-learned the AI-assisted automation tool Maestro and combined it with Appium to automate mobile testing for an internal build of the Signal app - increasing the number of tests completed in the same timeframe alongside manual testing.",
     overview:
       "Signal is a messaging app focused on privacy. It's free, easy to use, open-source, and features strong end-to-end encryption to keep communications completely private. I tested an internal build with unique integration features before it rolled out to customers worldwide.",
     servicesOffered: [
@@ -430,7 +430,7 @@ export const projects: Project[] = [
         art: "automation",
         wide: true,
         bullets: [
-          "Automated repetitive test cases with Maestro + Appium — message sending/receiving, calls, groups, registration",
+          "Automated repetitive test cases with Maestro + Appium - message sending/receiving, calls, groups, registration",
           "Wrote Python scripts to simulate end-user scenarios and confirm updates didn't break functionality",
           "Shortened regression testing periods, letting new builds be checked faster",
           "Automated Android testing with direct Jira failure reporting",
@@ -475,12 +475,12 @@ export const projects: Project[] = [
     servicesOffered: ["E2E", "Exploratory", "Interruption", "CRUD", "Security", "Backup & Restore", "Integration"],
     scopeSections: [
       {
-        heading: "Round 1 — functional testing",
+        heading: "Round 1 - functional testing",
         art: "round-1",
         bullets: ["Localization", "GUI", "Compatibility", "End-to-end", "Usability", "Exploratory", "CRUD"],
       },
       {
-        heading: "Round 2 — non-functional testing",
+        heading: "Round 2 - non-functional testing",
         art: "round-2",
         bullets: [
           "Integration",
@@ -581,7 +581,7 @@ export const projects: Project[] = [
     ],
     testimonial: {
       quote:
-        "Wow! I skimmed through your STD document in Jira to see your bug reports — you did an amazing job! It looks really impressive, detailed, and understandable! Well done! I will definitely go through all the bugs systematically and make sure to fix them before the next release. Truly, hats off to you!",
+        "Wow! I skimmed through your STD document in Jira to see your bug reports - you did an amazing job! It looks really impressive, detailed, and understandable! Well done! I will definitely go through all the bugs systematically and make sure to fix them before the next release. Truly, hats off to you!",
       author: "CEO, Smart CRM",
     },
   },
@@ -590,13 +590,13 @@ export const projects: Project[] = [
     name: "Planet",
     logo: "/images/logos/planet.png",
     logoAspect: 4,
-    tagline: "Premier cinema chain's online ticketing platform — seating, purchasing, and accessibility.",
+    tagline: "Premier cinema chain's online ticketing platform - seating, purchasing, and accessibility.",
     tags: ["Ticketing Services", "Web Application", "Accessibility"],
     featured: false,
     context:
       "As part of a QA course, our team was asked to perform professional tests ensuring bug-free operation of an online ticket-purchasing application.",
     overview:
-      "PLANET offers a world-class cinema experience — giant screens, advanced sound systems, luxurious seating, and one of the most advanced ticketing services available, with maximum accessibility for disabled persons. The web application runs on HTML5 across devices and browsers, with a seating-management system letting customers choose and pay for their seats in advance.",
+      "PLANET offers a world-class cinema experience - giant screens, advanced sound systems, luxurious seating, and one of the most advanced ticketing services available, with maximum accessibility for disabled persons. The web application runs on HTML5 across devices and browsers, with a seating-management system letting customers choose and pay for their seats in advance.",
     servicesOffered: ["Functional", "Compatibility", "Load", "I18N", "Accessibility"],
     scopeSections: [
       {
@@ -610,7 +610,7 @@ export const projects: Project[] = [
         bullets: [
           "Scope: GUI, E2E, accessibility",
           "Verified the annual ticket-purchasing flow end-to-end (positive & negative)",
-          "Found a critical defect in Venue 13 — a seating plan mismatch vs. reality, with potential revenue impact",
+          "Found a critical defect in Venue 13 - a seating plan mismatch vs. reality, with potential revenue impact",
         ],
       },
       {
@@ -696,7 +696,7 @@ export const projects: Project[] = [
     context:
       "As a QA tester on uTest's platform, I was invited to perform professional tests ensuring a bug-free experience for users watching VOD and live-stream content within the app.",
     overview:
-      "BIGi is a content app designed for kids and teenagers, offering television programs, series, and movies — including exclusive content from social media influencers and thousands of hours of content from Israel and abroad. Users can enjoy the children's channel, the LOGI channel, and a massive VOD library on any device, at any time.",
+      "BIGi is a content app designed for kids and teenagers, offering television programs, series, and movies - including exclusive content from social media influencers and thousands of hours of content from Israel and abroad. Users can enjoy the children's channel, the LOGI channel, and a massive VOD library on any device, at any time.",
     servicesOffered: ["Functional", "Compatibility", "Load", "I18N"],
     scopeSections: [
       {
@@ -726,7 +726,7 @@ export const projects: Project[] = [
         ],
       },
     ],
-    deviceScope: ["Android — Galaxy S22 Ultra, 5G, Android 13, One UI 5.1"],
+    deviceScope: ["Android - Galaxy S22 Ultra, 5G, Android 13, One UI 5.1"],
     tools: [],
     stats: [
       { value: "2", label: "Hours Duration" },
@@ -765,7 +765,7 @@ export const projects: Project[] = [
     context:
       "Invited to participate in a functional testing cycle for the new Carrefour website, focused on a convenient, user-friendly shopping experience with secure payment options and reliable delivery.",
     overview:
-      "Carrefour's e-commerce platform needed a regression pass across the core shopping journey ahead of release — from account access through checkout and post-purchase management.",
+      "Carrefour's e-commerce platform needed a regression pass across the core shopping journey ahead of release - from account access through checkout and post-purchase management.",
     servicesOffered: ["E2E", "Exploratory", "Regression"],
     scopeSections: [
       {
@@ -793,7 +793,7 @@ export const projects: Project[] = [
         ],
       },
     ],
-    deviceScope: ["Microsoft Surface Book — Windows 10 Pro, 22H2"],
+    deviceScope: ["Microsoft Surface Book - Windows 10 Pro, 22H2"],
     tools: [],
     stats: [
       { value: "4", label: "Hours Duration" },
@@ -819,7 +819,7 @@ export const projects: Project[] = [
     context:
       "As a QA tester on uTest's platform, I was invited to perform professional tests ensuring a bug-free experience for users redeeming their accumulated \"Goodies\".",
     overview:
-      "Leumi Goodies is a program that lets Bank Leumi customers accumulate \"Goodies\" on credit card purchases — accumulation begins once monthly card spend reaches 2,000 ILS, up to 8,000 ILS. The app lets customers redeem accumulated Goodies for benefits across movies, concerts, shows, food, fashion, beauty, vacations, gyms, and more.",
+      "Leumi Goodies is a program that lets Bank Leumi customers accumulate \"Goodies\" on credit card purchases - accumulation begins once monthly card spend reaches 2,000 ILS, up to 8,000 ILS. The app lets customers redeem accumulated Goodies for benefits across movies, concerts, shows, food, fashion, beauty, vacations, gyms, and more.",
     servicesOffered: ["E2E", "Functional", "Performance"],
     scopeSections: [
       {
@@ -836,7 +836,7 @@ export const projects: Project[] = [
         ],
       },
     ],
-    deviceScope: ["Android — Galaxy S22 Ultra, 5G, Android 13, One UI 5.1"],
+    deviceScope: ["Android - Galaxy S22 Ultra, 5G, Android 13, One UI 5.1"],
     tools: [],
     stats: [
       { value: "2", label: "Hours Duration" },

@@ -38,9 +38,15 @@ export async function generateMetadata({ params }: PageProps<"/projects/[slug]">
   const { slug } = await params;
   const project = getProject(slug);
   if (!project) return {};
+  const title = `${project.name} - Idan Pnuel`;
+  // openGraph and twitter replace the layout's objects (they are not merged) and then drop its file-based image, so each
+  // page states its own text and points at the shared preview image (`opengraph-image.tsx`) itself.
+  const image = { url: "/opengraph-image", width: 1200, height: 630, alt: "Idan Pnuel - QA Engineer" };
   return {
-    title: `${project.name} — Idan Pnuel`,
+    title,
     description: project.tagline,
+    openGraph: { title, description: project.tagline, siteName: "Idan Pnuel - QA Engineer", type: "website", images: [image] },
+    twitter: { card: "summary_large_image", title, description: project.tagline, images: [image] },
   };
 }
 
@@ -314,7 +320,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </Reveal>
           <Reveal delay={0.05}>
             <p className="mt-3 text-sm text-muted-foreground">
-              As a result of customer privacy agreements, full testing documents can&apos;t always be shared publicly —
+              As a result of customer privacy agreements, full testing documents can&apos;t always be shared publicly -
               placeholders below mark what&apos;s coming as artifacts are cleared for release.
             </p>
           </Reveal>
@@ -357,7 +363,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 <blockquote className="shadow-hard mt-3 rotate-1 rounded-2xl bg-white p-6 text-foreground/90">
                   <p className="text-lg italic">&ldquo;{project.testimonial.quote}&rdquo;</p>
                   <footer className="mt-4 font-mono text-xs uppercase tracking-wide text-foreground/60">
-                    — {project.testimonial.author}
+                    - {project.testimonial.author}
                   </footer>
                 </blockquote>
               </Reveal>

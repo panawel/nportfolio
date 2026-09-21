@@ -7,7 +7,7 @@ export default function NotFound() {
       <h1 className="mt-4 -rotate-1 text-6xl font-medium tracking-tight text-foreground sm:text-7xl">404</h1>
       <p className="mt-3 font-mono text-sm text-destructive">[FAILED] page not found</p>
       <p className="mt-4 max-w-sm text-muted-foreground">
-        This route doesn&apos;t exist — logged as a defect, closing it by sending you home.
+        This route doesn&apos;t exist - logged as a defect, closing it by sending you home.
       </p>
       <Link
         href="/"

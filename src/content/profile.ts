@@ -163,13 +163,13 @@ export const certificates: Certificate[] = [
     issuer: "HackerU College",
     date: "July 2023",
     description:
-      "A 355-academic-hour QA program covering manual testing fundamentals through automation — completed July 2023.",
+      "A 355-academic-hour QA program covering manual testing fundamentals through automation - completed July 2023.",
     featured: true,
     document: {
       src: "/images/certificates/hackeru/hackeru-1.jpg",
       width: 1890,
       height: 2805,
-      caption: "Certificate of Achievement — QA, 355 academic hours",
+      caption: "Certificate of Achievement - QA, 355 academic hours",
     },
     gallery: [
       { src: "/images/certificates/hackeru/hackeru-2.jpg", caption: "Graduating cohort" },
@@ -186,16 +186,16 @@ export const certificates: Certificate[] = [
   {
     slug: "channel-13",
     title: "Certificate of Excellence",
-    issuer: "Channel 13 — News",
+    issuer: "Channel 13 - News",
     date: "2023",
     description:
-      "Recognized as an outstanding video editor for dedication, creativity, and reliability — a role unrelated to QA, but the same work ethic carries over.",
+      "Recognized as an outstanding video editor for dedication, creativity, and reliability - a role unrelated to QA, but the same work ethic carries over.",
     featured: false,
     document: {
       src: "/images/certificates/channel13/channel13-1.jpg",
       width: 3000,
       height: 4000,
-      caption: "Certificate of Excellence — for outstanding work as a video editor",
+      caption: "Certificate of Excellence - for outstanding work as a video editor",
     },
     gallery: [
       { src: "/images/certificates/channel13/channel13-2.jpg", caption: "On-air tribute during the appreciation ceremony" },
