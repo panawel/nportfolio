@@ -2,7 +2,7 @@ export const profile = {
   name: "Idan Pnuel",
   role: "QA Engineer",
   startDate: "2023-09-01",
-  heroPhoto: "/images/hero/idan-desk.jpg",
+  heroPhoto: "/images/hero/idan-desk-mirrored.jpg",
   about: {
     lead: "I specialize in reducing bug life cycles and optimizing workflows with AI tools.",
     /** Phrases inside `lead` that get the lime highlighter band; must match the text exactly. */

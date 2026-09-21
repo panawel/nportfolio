@@ -65,9 +65,9 @@ export function Hero() {
             the face is a third of its height; filling a tall phone screen scales it up ~2x). The text
             starts at 72% of the box (where the tag is) and the photo fades to the dark hero background
             from there. From `lg` the box fills the whole hero, as before.
-            object-position selects the crop window (shifted left, less so on wide screens, since Idan
-            sits on the left third of the source photo); the crop is then mirrored horizontally so his
-            face lands on the right of the frame, clear of the left-aligned text. */}
+            object-position selects the crop window (shifted right, less so on wide screens, since Idan
+            sits on the right third of the source photo, which is already mirrored so his face lands on
+            the right of the frame, clear of the left-aligned text). */}
         <div className="absolute inset-x-0 top-0 h-[var(--hero-photo)] [mask-image:linear-gradient(to_bottom,#000_72%,rgb(0_0_0/0.6)_82%,rgb(0_0_0/0.25)_92%,transparent)] lg:inset-0 lg:h-auto lg:[mask-image:none]">
           <Image
             src={profile.heroPhoto}
@@ -75,9 +75,9 @@ export function Hero() {
             fill
             sizes="100vw"
             priority
-            className="-scale-x-100 object-cover object-[12%_center] sm:object-[18%_center] lg:object-[26%_center]"
+            className="object-cover object-[88%_center] sm:object-[82%_center] lg:object-[74%_center]"
           />
-          {/* A very soft glow: a blurred, brightened copy of the same photo (same crop, mirrored, a little larger so the
+          {/* A very soft glow: a blurred, brightened copy of the same photo (same crop, a little larger so the
               blur never shows an edge) screened over it at low opacity, like light blooming off the monitors and the
               window. Not a gradient. It sits under the scrim, so the text contrast is set by the scrim as before. */}
           <Image
@@ -86,7 +86,7 @@ export function Hero() {
             aria-hidden
             fill
             sizes="100vw"
-            className="pointer-events-none object-cover object-[12%_center] opacity-[0.22] mix-blend-screen blur-[26px] brightness-[1.35] saturate-[1.15] [scale:-1.12_1.12] sm:object-[18%_center] lg:object-[26%_center]"
+            className="pointer-events-none object-cover object-[88%_center] opacity-[0.22] mix-blend-screen blur-[26px] brightness-[1.35] saturate-[1.15] scale-[1.12] sm:object-[82%_center] lg:object-[74%_center]"
           />
           {/* Flat scrim (not a gradient) so white text stays legible over a busy photo. */}
           <div className="absolute inset-0 bg-black/45" />
