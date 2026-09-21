@@ -128,16 +128,11 @@ export function Hero() {
                 >
                   View Projects
                 </SectionLink>
-                <SectionLink
-                  href="/#contact"
-                  className="rounded-full border-2 border-white px-4 py-3 text-sm font-semibold whitespace-nowrap text-white sm:px-6 transition-transform duration-150 hover:-rotate-1 hover:bg-white hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                >
-                  Get in Touch
-                </SectionLink>
               </div>
             </Reveal>
             <Reveal delay={0.25}>
-              <div className="mt-7 inline-flex max-w-full rotate-1 flex-wrap items-center gap-x-2 rounded-3xl border border-white/20 bg-black/40 px-4 py-2 text-sm text-white/80">
+              {/* Never wraps: the text shrinks with the width (about 10px at 320, 14px from about 410) so it always fits. */}
+              <div className="mt-7 inline-flex max-w-full rotate-1 flex-nowrap items-center gap-x-2 whitespace-nowrap rounded-3xl border border-white/20 bg-black/40 px-3 py-2 text-[length:min(14px,calc((100vw_-_80px)*0.042))] text-white/80 min-[360px]:px-4">
                 <span className="whitespace-nowrap">Celebrating</span>
                 <span className="whitespace-nowrap font-mono font-semibold text-white">
                   <ExperienceCounter startDate={profile.startDate} />
