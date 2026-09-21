@@ -32,7 +32,7 @@ There is no test suite and no single-test command. "Done" means `tsc`, `eslint -
 
 **Hero specifics** (`Hero.tsx`, `HeroStatCards.tsx`). The hero `<section>` has `clip-path: inset(0)` on purpose: it makes it a backdrop root, so the `backdrop-filter` blur layers (`BlurBox` on desktop, `BlurBand` below `lg`, CSS in `.hero-blur*`) don't sample the white page around the rounded panel. Below `lg` the photo lives in its own box (`--hero-photo`) so the face isn't zoomed in, and text starts at 72% of it. `heroStats` (real totals, also read by `opengraph-image.tsx`) and `heroCounters` (simulated live numbers shown on the tickets) are different data on purpose. The nav is a fixed pill with scrollspy, transparent over the hero only on `/`.
 
-**Generated metadata:** `icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx` render with `next/og`; `sitemap.ts`/`robots.ts` derive from `projects`. `SITE_URL` in `src/lib/site.ts` is a placeholder until the real Vercel URL exists.
+**Generated metadata:** `icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx` render with `next/og`; `sitemap.ts`/`robots.ts` derive from `projects`. `SITE_URL` in `src/lib/site.ts` is the live address (`https://panawel-portfolio.vercel.app`); change it together with the Vercel domain.
 
 **Certificates:** `CertificateCard` per credential + the shared `MediaLightbox` (also used by the case-study gallery; an empty caption hides the caption pill).
 
@@ -44,10 +44,11 @@ There is no test suite and no single-test command. "Done" means `tsc`, `eslint -
 - Images live under `public/images/` by purpose. Raw originals go in git-ignored `assets/originals/` (keep a copy before compressing). Every project's media is already optimized under `public/images/projects/<slug>/` (no raw dump is left in `public`). There is no ffmpeg/Homebrew here; GIFs were turned into MP4 with a small Swift/AVFoundation script.
 - Browser preview pane: animations, `IntersectionObserver` and rAF only advance when a frame is painted (take a small screenshot first); `Reveal` content stays invisible until painted in view; screenshots taken after scrolling can misplace content.
 - Don't scale drawings with CSS `zoom`: older Safari (18.x) ignores it, so the drawings stayed full size and overlapped their labels. Use `src/components/Scaled.tsx` (a `transform: scale()` inside a box of the scaled size; give it the drawing's natural px size). Safari can't be tested here.
+- Replacing the Baba Casino recordings (`public/videos/baba/`): there is no ffmpeg, so frames are read with an `AVAssetImageGenerator` script and the videos are re-encoded with an `AVAssetWriter` script (H.264, faststart). Output sizes must keep the sources' ratios: desktop 1280x696, mobile 540x1170, about 1.4-1.6 Mbps (about 3 MB each), plus a poster JPG of the same size each. Then update `video.duration` and re-time the `cues` in `content/automation.ts` from 0.25 s frames; keep the originals in `assets/originals/`. The recordings are of a test account only, and the section's label says so; don't publish a recording that shows real user data.
 - GitHub/LinkedIn icons are hand-rolled in `components/icons/BrandIcons.tsx` (lucide has no brand icons).
 
 ## Working agreements
 
 - Design changes: plan first (plan mode + short questions), then build. Small asks: just do them.
-- Do not create/push the public GitHub repo, set up Vercel, or commit unless explicitly asked. English only. MIT covers code only, not the case-study content, logos or photos.
+- Commit and push only when explicitly asked. The site lives in the public repo `panawel/nportfolio`; pushing `main` deploys to production on Vercel within about a minute (check the live page afterwards). The old portfolio repo `panawel/Portfolio` must stay untouched. English only. MIT covers code only, not the case-study content, logos or photos.
 - `README.md` was rewritten for the current light design and deployment (Vercel). `design-system/` is old local notes and is git-ignored (not published).

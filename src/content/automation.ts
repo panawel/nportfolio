@@ -45,21 +45,11 @@ import re
 
 from playwright.sync_api import Page, expect
 
-import helpers
 from screens import HomeScreen
 
 
 def test_checkout_flow_desktop(page: Page) -> None:
     home = HomeScreen(page)
-    page.set_viewport_size({"width": 1920, "height": 1080})
-    page.goto(HomeScreen.ENTRY_URL)
-    expect(page).to_have_url(HomeScreen.ENTRY_URL)
-    expect(page).to_have_title(HomeScreen.ENTRY_TITLE)
-
-    # Login Flow
-    helpers.sign_in(page, user_email, defocus=True)
-    expect(page.locator(".avatar-chip")).to_be_visible(timeout=10000)
-    expect(page.locator(".pouch-chip")).to_be_enabled()
 
     # Open Store
     with page.expect_response(lambda res: "/svc/v2/catalog" in res.url and res.status == 200):
@@ -119,21 +109,11 @@ import re
 
 from playwright.sync_api import Page, expect
 
-import helpers
 from screens import HomeScreen
 
 
 def test_checkout_flow_mobile(page: Page) -> None:
     home = HomeScreen(page)
-    page.set_viewport_size({"width": 375, "height": 812})
-    page.goto(HomeScreen.ENTRY_URL)
-    expect(page).to_have_url(HomeScreen.ENTRY_URL)
-    expect(page).to_have_title(HomeScreen.ENTRY_TITLE)
-
-    # Login Flow
-    helpers.sign_in(page, user_email, defocus=True)
-    expect(page.locator(".avatar-chip")).to_be_visible(timeout=10000)
-    expect(page.locator(".pouch-chip")).to_be_enabled()
 
     # Open Store
     with page.expect_response(lambda res: "/svc/v2/catalog" in res.url and res.status == 200):
@@ -189,89 +169,77 @@ def test_checkout_flow_mobile(page: Page) -> None:
     assert {json.loads(r.post_data_json["batch"][0]["body"].get("extra", "{}")).get("trace_id")
             for r in captured if "telemetry" in r.url and r.post_data} - {None} == {res_a.request.post_data_json["trace_id"]}`;
 
-// Times (seconds) were read frame by frame from the two recordings (22.3 s and 22.4 s); nudge a value here if a
+// Times (seconds) were read frame by frame from the two recordings (17.5 s and 17.4 s, no login: they start at the store); nudge a value here if a
 // highlighted line ever feels early or late against the picture.
 const desktopCues: CueSpec[] = [
-  { t: 0.0, at: "page.set_viewport_size", kind: "step", label: "Setting the viewport" },
-  { t: 0.3, at: "page.goto(", kind: "step", label: "Opening the app" },
-  { t: 1.0, at: "to_have_url", kind: "assert", label: "Checking the URL" },
-  { t: 1.25, at: "to_have_title", kind: "assert", label: "Checking the title" },
-  { t: 1.5, at: "helpers.sign_in", kind: "step", label: "Login flow" },
-  { t: 4.85, at: ".avatar-chip", kind: "assert", label: "Checking the profile icon" },
-  { t: 5.3, at: ".pouch-chip", kind: "assert", label: "Checking the wallet icon" },
-  { t: 7.2, at: "with page.expect_response(lambda", kind: "api", label: "Opening the store", chip: "200 · /svc/v2/catalog" },
-  { t: 7.45, at: "home.bag_button.click", kind: "step", label: "Opening the store" },
-  { t: 8.3, at: "pick = page.locator", kind: "step", label: "Choosing a package" },
-  { t: 8.55, at: "expect(pick)", kind: "assert", label: "Checking the package button" },
-  { t: 8.7, at: "captured = []", kind: "step", label: "Logging requests" },
-  { t: 8.8, at: "page.on(", kind: "step", label: "Logging requests" },
-  { t: 8.95, at: "pick.click()", kind: "step", label: "Choosing a package" },
-  { t: 9.1, at: 'expect_response("**/ord/prepare")', kind: "api", label: "API 1 · waiting for responses", chip: "200 · 2 responses" },
-  { t: 10.85, at: "res_a = waiter_a.value", kind: "step", label: "API 1 · reading the responses" },
-  { t: 11.05, at: 'assert res_a.json()["ref_code"]', kind: "assert", label: "API 1 · comparing ref_code" },
-  { t: 11.15, at: '".checkout-sheet"', kind: "assert", label: "Checking the checkout sheet" },
-  { t: 11.3, at: 'get_by_text("Credit Card"', kind: "step", label: "Paying by credit card" },
-  { t: 11.42, at: "span.total-line", kind: "assert", label: "Checking the total" },
-  { t: 11.52, at: 'name="Continue"', kind: "step", label: "Continue" },
-  { t: 11.75, at: "frame_locator", kind: "step", label: "Entering the security code" },
-  { t: 11.95, at: 'name="PROCEED"', kind: "step", label: "Confirming the payment" },
-  { t: 12.1, at: 'expect_response("**/ord/finalize")', kind: "api", label: "API 2 · waiting for /ord/finalize", chip: "200 · /ord/finalize" },
-  { t: 14.3, at: "res_c = waiter_c.value", kind: "step", label: "API 2 · reading the response" },
-  { t: 14.45, at: 'assert res_b.json()["ticket"]', kind: "assert", label: "API 2 · comparing ticket" },
-  { t: 14.6, at: '".spinner-veil"', kind: "step", label: "Waiting for the loader" },
-  { t: 15.05, at: '".receipt-backdrop"', kind: "assert", label: "Checking the receipt" },
-  { t: 16.0, at: "tally_before =", kind: "step", label: "Capturing the balance" },
-  { t: 16.35, at: "while page.locator", kind: "step", label: "Summary loop" },
-  { t: 16.5, at: "ack = page.locator", kind: "step", label: "Summary loop" },
-  { t: 17.45, at: "ack.wait_for", kind: "step", label: "Waiting for the button" },
-  { t: 17.6, at: "page.wait_for_function", kind: "step", label: "Waiting for the button to fade in" },
-  { t: 18.85, at: "ack.click()", kind: "step", label: "Closing the summary" },
-  { t: 19.1, at: "not_to_be_visible()", kind: "assert", label: "Waiting for the summary to close" },
-  { t: 20.95, at: "tally-fresh", kind: "assert", label: "Checking the updated balance" },
-  { t: 21.35, at: "assert len(set(", kind: "assert", label: "Request log · one session" },
-  { t: 21.85, at: "assert {json.loads", kind: "assert", label: "Request log · trace id" },
+  { t: 0.0, at: "home = HomeScreen", kind: "step", label: "Starting the test" },
+  { t: 0.1, at: "with page.expect_response(lambda", kind: "api", label: "Opening the store", chip: "200 · /svc/v2/catalog" },
+  { t: 0.25, at: "home.bag_button.click", kind: "step", label: "Opening the store" },
+  { t: 0.8, at: "pick = page.locator", kind: "step", label: "Choosing a package" },
+  { t: 0.9, at: "expect(pick)", kind: "assert", label: "Checking the package button" },
+  { t: 2.6, at: "captured = []", kind: "step", label: "Logging requests" },
+  { t: 2.7, at: "page.on(", kind: "step", label: "Logging requests" },
+  { t: 2.85, at: "pick.click()", kind: "step", label: "Choosing a package" },
+  { t: 3.0, at: "expect_response(\"**/ord/prepare\")", kind: "api", label: "API 1 · waiting for responses", chip: "200 · 2 responses" },
+  { t: 5.0, at: "res_a = waiter_a.value", kind: "step", label: "API 1 · reading the responses" },
+  { t: 5.1, at: "assert res_a.json()[\"ref_code\"]", kind: "assert", label: "API 1 · comparing ref_code" },
+  { t: 5.2, at: "\".checkout-sheet\"", kind: "assert", label: "Checking the checkout sheet" },
+  { t: 5.4, at: "get_by_text(\"Credit Card\"", kind: "step", label: "Paying by credit card" },
+  { t: 5.5, at: "span.total-line", kind: "assert", label: "Checking the total" },
+  { t: 6.85, at: "name=\"Continue\"", kind: "step", label: "Continue" },
+  { t: 7.05, at: "frame_locator", kind: "step", label: "Entering the security code" },
+  { t: 7.35, at: "name=\"PROCEED\"", kind: "step", label: "Confirming the payment" },
+  { t: 7.45, at: "expect_response(\"**/ord/finalize\")", kind: "api", label: "API 2 · waiting for /ord/finalize", chip: "200 · /ord/finalize" },
+  { t: 9.9, at: "res_c = waiter_c.value", kind: "step", label: "API 2 · reading the response" },
+  { t: 10.0, at: "assert res_b.json()[\"ticket\"]", kind: "assert", label: "API 2 · comparing ticket" },
+  { t: 10.1, at: "\".spinner-veil\"", kind: "step", label: "Waiting for the loader" },
+  { t: 11.0, at: "\".receipt-backdrop\"", kind: "assert", label: "Checking the receipt" },
+  { t: 12.0, at: "tally_before =", kind: "step", label: "Capturing the balance" },
+  { t: 12.2, at: "while page.locator", kind: "step", label: "Summary loop" },
+  { t: 12.4, at: "ack = page.locator", kind: "step", label: "Summary loop" },
+  { t: 12.8, at: "ack.wait_for", kind: "step", label: "Waiting for the button" },
+  { t: 12.9, at: "page.wait_for_function", kind: "step", label: "Waiting for the button to fade in" },
+  { t: 14.6, at: "ack.click()", kind: "step", label: "Closing the summary" },
+  { t: 14.8, at: "not_to_be_visible()", kind: "assert", label: "Waiting for the summary to close" },
+  { t: 15.6, at: "tally-fresh", kind: "assert", label: "Checking the updated balance" },
+  { t: 16.3, at: "assert len(set(", kind: "assert", label: "Request log · one session" },
+  { t: 16.9, at: "assert {json.loads", kind: "assert", label: "Request log · trace id" },
 ];
 
 const mobileCues: CueSpec[] = [
-  { t: 0.0, at: "page.set_viewport_size", kind: "step", label: "Setting the viewport" },
-  { t: 0.3, at: "page.goto(", kind: "step", label: "Opening the app" },
-  { t: 1.0, at: "to_have_url", kind: "assert", label: "Checking the URL" },
-  { t: 1.25, at: "to_have_title", kind: "assert", label: "Checking the title" },
-  { t: 1.5, at: "helpers.sign_in", kind: "step", label: "Login flow" },
-  { t: 6.6, at: ".avatar-chip", kind: "assert", label: "Checking the profile icon" },
-  { t: 7.0, at: ".pouch-chip", kind: "assert", label: "Checking the wallet icon" },
-  { t: 7.4, at: "with page.expect_response(lambda", kind: "api", label: "Opening the store", chip: "200 · /svc/v2/catalog" },
-  { t: 7.65, at: "home.bag_button_compact.click", kind: "step", label: "Opening the store" },
-  { t: 10.3, at: "pick = page.locator", kind: "step", label: "Choosing a package" },
-  { t: 10.34, at: "expect(pick)", kind: "assert", label: "Checking the package button" },
-  { t: 10.38, at: "captured = []", kind: "step", label: "Logging requests" },
-  { t: 10.42, at: "page.on(", kind: "step", label: "Logging requests" },
-  { t: 10.47, at: "pick.click()", kind: "step", label: "Choosing a package" },
-  { t: 10.6, at: 'expect_response("**/ord/prepare")', kind: "api", label: "API 1 · waiting for responses", chip: "200 · 2 responses" },
-  { t: 12.3, at: "res_a = waiter_a.value", kind: "step", label: "API 1 · reading the responses" },
-  { t: 12.45, at: 'assert res_a.json()["ref_code"]', kind: "assert", label: "API 1 · comparing ref_code" },
-  { t: 12.55, at: '".checkout-sheet.sheet-compact"', kind: "assert", label: "Checking the checkout sheet" },
-  { t: 12.72, at: 'get_by_text("Credit Card"', kind: "step", label: "Paying by credit card" },
-  { t: 12.84, at: "span.total-line", kind: "assert", label: "Checking the total" },
-  { t: 12.95, at: 'name="Continue"', kind: "step", label: "Continue" },
-  { t: 13.1, at: "frame_locator", kind: "step", label: "Entering the security code" },
-  { t: 13.25, at: 'name="PROCEED"', kind: "step", label: "Confirming the payment" },
-  { t: 13.4, at: 'expect_response("**/ord/finalize")', kind: "api", label: "API 2 · waiting for /ord/finalize", chip: "200 · /ord/finalize" },
-  { t: 15.0, at: "res_c = waiter_c.value", kind: "step", label: "API 2 · reading the response" },
-  { t: 15.1, at: 'assert res_b.json()["ticket"]', kind: "assert", label: "API 2 · comparing ticket" },
-  { t: 15.25, at: '".spinner-veil"', kind: "step", label: "Waiting for the loader" },
-  { t: 15.9, at: '".receipt-backdrop img"', kind: "assert", label: "Checking the receipt" },
-  { t: 16.2, at: "tally_before =", kind: "step", label: "Capturing the balance" },
-  { t: 16.4, at: "ack = page.locator", kind: "step", label: "Summary loop" },
-  { t: 16.55, at: "while ack.is_visible()", kind: "step", label: "Summary loop" },
-  { t: 16.7, at: "to_be_visible()", kind: "assert", label: "Checking the summary" },
-  { t: 17.85, at: "ack.wait_for", kind: "step", label: "Waiting for the button" },
-  { t: 18.0, at: "page.wait_for_function", kind: "step", label: "Waiting for the button to fade in" },
-  { t: 19.25, at: "ack.click()", kind: "step", label: "Closing the summary" },
-  { t: 19.4, at: "not_to_be_visible()", kind: "assert", label: "Waiting for the summary to close" },
-  { t: 21.0, at: "tally-fresh", kind: "assert", label: "Checking the updated balance" },
-  { t: 21.5, at: "assert len(set(", kind: "assert", label: "Request log · one session" },
-  { t: 22.0, at: "assert {json.loads", kind: "assert", label: "Request log · trace id" },
+  { t: 0.0, at: "home = HomeScreen", kind: "step", label: "Starting the test" },
+  { t: 0.1, at: "with page.expect_response(lambda", kind: "api", label: "Opening the store", chip: "200 · /svc/v2/catalog" },
+  { t: 1.9, at: "home.bag_button_compact.click", kind: "step", label: "Opening the store" },
+  { t: 4.55, at: "pick = page.locator", kind: "step", label: "Choosing a package" },
+  { t: 4.6, at: "expect(pick)", kind: "assert", label: "Checking the package button" },
+  { t: 4.65, at: "captured = []", kind: "step", label: "Logging requests" },
+  { t: 4.7, at: "page.on(", kind: "step", label: "Logging requests" },
+  { t: 4.75, at: "pick.click()", kind: "step", label: "Choosing a package" },
+  { t: 4.85, at: "expect_response(\"**/ord/prepare\")", kind: "api", label: "API 1 · waiting for responses", chip: "200 · 2 responses" },
+  { t: 6.3, at: "res_a = waiter_a.value", kind: "step", label: "API 1 · reading the responses" },
+  { t: 6.4, at: "assert res_a.json()[\"ref_code\"]", kind: "assert", label: "API 1 · comparing ref_code" },
+  { t: 6.5, at: "\".checkout-sheet.sheet-compact\"", kind: "assert", label: "Checking the checkout sheet" },
+  { t: 6.6, at: "get_by_text(\"Credit Card\"", kind: "step", label: "Paying by credit card" },
+  { t: 6.7, at: "span.total-line", kind: "assert", label: "Checking the total" },
+  { t: 7.85, at: "name=\"Continue\"", kind: "step", label: "Continue" },
+  { t: 8.05, at: "frame_locator", kind: "step", label: "Entering the security code" },
+  { t: 8.4, at: "name=\"PROCEED\"", kind: "step", label: "Confirming the payment" },
+  { t: 8.5, at: "expect_response(\"**/ord/finalize\")", kind: "api", label: "API 2 · waiting for /ord/finalize", chip: "200 · /ord/finalize" },
+  { t: 10.4, at: "res_c = waiter_c.value", kind: "step", label: "API 2 · reading the response" },
+  { t: 10.5, at: "assert res_b.json()[\"ticket\"]", kind: "assert", label: "API 2 · comparing ticket" },
+  { t: 10.6, at: "\".spinner-veil\"", kind: "step", label: "Waiting for the loader" },
+  { t: 10.9, at: "\".receipt-backdrop img\"", kind: "assert", label: "Checking the receipt" },
+  { t: 12.0, at: "tally_before =", kind: "step", label: "Capturing the balance" },
+  { t: 12.4, at: "ack = page.locator", kind: "step", label: "Summary loop" },
+  { t: 12.5, at: "while ack.is_visible()", kind: "step", label: "Summary loop" },
+  { t: 12.6, at: "to_be_visible()", kind: "assert", label: "Checking the summary" },
+  { t: 12.8, at: "ack.wait_for", kind: "step", label: "Waiting for the button" },
+  { t: 12.9, at: "page.wait_for_function", kind: "step", label: "Waiting for the button to fade in" },
+  { t: 14.3, at: "ack.click()", kind: "step", label: "Closing the summary" },
+  { t: 14.4, at: "not_to_be_visible()", kind: "assert", label: "Waiting for the summary to close" },
+  { t: 15.2, at: "tally-fresh", kind: "assert", label: "Checking the updated balance" },
+  { t: 16.2, at: "assert len(set(", kind: "assert", label: "Request log · one session" },
+  { t: 16.8, at: "assert {json.loads", kind: "assert", label: "Request log · trace id" },
 ];
 
 export const paymentFlowExamples: AutomationExample[] = [
@@ -287,7 +255,7 @@ export const paymentFlowExamples: AutomationExample[] = [
       poster: "/videos/baba/payment-desktop-poster.jpg",
       width: 1280,
       height: 696,
-      duration: 22.33,
+      duration: 17.49,
     },
     cues: desktopCues,
   },
@@ -303,7 +271,7 @@ export const paymentFlowExamples: AutomationExample[] = [
       poster: "/videos/baba/payment-mobile-poster.jpg",
       width: 540,
       height: 1170,
-      duration: 22.43,
+      duration: 17.4,
     },
     cues: mobileCues,
   },
