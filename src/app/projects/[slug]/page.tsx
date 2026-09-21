@@ -23,7 +23,6 @@ import { RetroTv } from "@/components/case-study/RetroTv";
 import { SecurePhones } from "@/components/case-study/SecurePhones";
 import { BalloonPhone } from "@/components/case-study/BalloonPhone";
 import { ShoppingCartHero } from "@/components/case-study/ShoppingCartHero";
-import { StreamingOverview } from "@/components/case-study/StreamingOverview";
 import { TestimonialStars } from "@/components/case-study/TestimonialStars";
 import { AutomationExample } from "@/components/case-study/AutomationExample";
 import { ToolTiles } from "@/components/case-study/ToolTiles";
@@ -69,12 +68,12 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   // The dots on the side: one per section that exists, labelled with that section's own heading.
   const dots: SectionDot[] = [
     { id: "top", label: project.name },
-    ...(project.stats.length > 0 ? [{ id: "in-numbers", label: "In Numbers" }] : []),
     { id: "overview", label: "Overview" },
     ...(project.scopeSections.length > 0 ? [{ id: "scope", label: "Project Scope" }] : []),
     ...(project.deviceScope.length > 0 || project.tools.length > 0
       ? [{ id: "device-tools", label: project.deviceScope.length > 0 ? "Device Scope" : "Tools" }]
       : []),
+    ...(project.stats.length > 0 ? [{ id: "in-numbers", label: "In Numbers" }] : []),
     { id: "documents", label: "Documents & Gallery" },
     ...(project.results.length > 0 || project.testimonial ? [{ id: "results", label: "Results" }] : []),
   ];
@@ -106,7 +105,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
     }
     return (
       <Reveal key={doc.label} delay={i * 0.05}>
-        <div className="flex h-full items-center gap-3 rounded-xl border-2 border-dashed border-border bg-white/60 p-4 text-sm text-muted-foreground">
+        <div className="flex h-full items-center gap-3 rounded-xl border-2 border-dashed border-border bg-shell p-4 text-sm text-muted-foreground">
           <Icon className="h-4 w-4 text-foreground" />
           {doc.label}
         </div>
@@ -116,7 +115,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const recordings = project.gallery ?? [];
   const galleryPlaceholders = Array.from({ length: Math.max(0, project.galleryCount - recordings.length) }).map((_, i) => (
     <Reveal key={`gallery-${i}`} delay={(project.documents.length + i) * 0.05}>
-      <div className="flex aspect-video items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-white/60 text-xs text-muted-foreground">
+      <div className="flex aspect-video items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-shell text-xs text-muted-foreground">
         <ImageIcon className="h-4 w-4" /> Screenshot coming soon
       </div>
     </Reveal>
@@ -204,27 +203,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         </div>
       </section>
 
-      {project.stats.length > 0 && (
-        <section id="in-numbers" className="frame-x scroll-mt-24">
-          <div className="mx-auto max-w-4xl px-6 py-14">
-            <Reveal>
-              <Eyebrow>In Numbers</Eyebrow>
-            </Reveal>
-            <TicketRow className={`mt-6 grid grid-cols-2 gap-3 ${statColumns[project.stats.length] ?? "sm:grid-cols-3 lg:grid-cols-4"}`}>
-              {project.stats.map((stat, i) => (
-                <StatCard
-                  key={stat.label}
-                  stat={stat}
-                  index={i}
-                  // An odd last block spans both columns on phones, so no block is left alone.
-                  className={project.stats.length % 2 === 1 && i === project.stats.length - 1 ? "max-sm:col-span-2" : undefined}
-                />
-              ))}
-            </TicketRow>
-          </div>
-        </section>
-      )}
-
       <section id="overview" className="frame-x scroll-mt-24">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <Reveal>
@@ -240,12 +218,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             </Reveal>
             {project.overviewPhotos && <PhotoStickers photos={project.overviewPhotos} className="mt-8 lg:mt-1" />}
           </div>
-
-          {project.overviewVisual && (
-            <Reveal delay={0.1}>
-              {project.overviewVisual === "streaming-flow" && <StreamingOverview className="mt-8" />}
-            </Reveal>
-          )}
 
           {project.servicesOffered.length > 0 && (
             <Reveal delay={0.1}>
@@ -317,7 +289,28 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         </section>
       )}
 
-      <section id="documents" className="panel scroll-mt-24 bg-shell">
+      {project.stats.length > 0 && (
+        <section id="in-numbers" className="panel scroll-mt-24 bg-shell">
+          <div className="mx-auto max-w-4xl px-6 py-16">
+            <Reveal>
+              <Eyebrow>In Numbers</Eyebrow>
+            </Reveal>
+            <TicketRow className={`mt-6 grid grid-cols-2 gap-3 ${statColumns[project.stats.length] ?? "sm:grid-cols-3 lg:grid-cols-4"}`}>
+              {project.stats.map((stat, i) => (
+                <StatCard
+                  key={stat.label}
+                  stat={stat}
+                  index={i}
+                  // An odd last block spans both columns on phones, so no block is left alone.
+                  className={project.stats.length % 2 === 1 && i === project.stats.length - 1 ? "max-sm:col-span-2" : undefined}
+                />
+              ))}
+            </TicketRow>
+          </div>
+        </section>
+      )}
+
+      <section id="documents" className="frame-x scroll-mt-24">
         <div className="mx-auto max-w-4xl px-6 py-16">
           <Reveal>
             <Eyebrow>Documents &amp; Gallery</Eyebrow>
@@ -347,7 +340,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       </section>
 
       {(project.results.length > 0 || project.testimonial) && (
-        <section id="results" className="frame-x relative scroll-mt-24 py-16">
+        <section id="results" className="panel relative scroll-mt-24 bg-shell py-16">
           {project.resultsVisual === "coin-shower" && <CoinShower />}
           {project.resultsVisual === "ticket-shower" && <CoinShower variant="tickets" />}
           {project.resultsVisual === "star-shower" && <CoinShower variant="stars" />}

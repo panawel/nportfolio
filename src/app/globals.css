@@ -662,11 +662,6 @@ body {
   55% { transform: scaleY(0.5); }
   80% { transform: scaleY(0.85); }
 }
-@keyframes cs-heart {
-  0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
-  20% { opacity: 1; }
-  100% { transform: translate(var(--hx, 0px), -56px) scale(1); opacity: 0; }
-}
 @keyframes cs-hand {
   from { transform: rotate(0deg); }
   to { transform: rotate(720deg); }
@@ -701,7 +696,6 @@ body {
 .cs-scene { animation: cs-scene 8.8s ease-in-out infinite; }
 .cs-ball { animation: cs-ball 1.1s ease-in-out infinite; }
 .cs-eq { transform-origin: bottom; animation: cs-eq 1.4s ease-in-out infinite; }
-.cs-heart { animation: cs-heart 2.8s ease-out infinite; }
 .cs-hand { transform-origin: 50% 100%; animation: cs-hand 6s ease-in-out infinite; }
 .cs-static { animation: cs-static 2.2s linear infinite; }
 .cs-step { animation: cs-step 5.6s ease-in-out infinite; }
@@ -963,7 +957,6 @@ body {
   .cs-scene,
   .cs-ball,
   .cs-eq,
-  .cs-heart,
   .cs-hand,
   .cs-static,
   .cs-ring-fill,

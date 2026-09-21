@@ -126,7 +126,6 @@ export type Project = {
   /** Show the hero picture small: beside the title on phones (and a smaller column from `lg`). Popcorn and retro TV only. */
   heroInline?: boolean;
   heroVisual?: "voucher-phone" | "slot-machine" | "popcorn" | "crm-phone" | "retro-tv" | "phones-lock" | "balloon-phone" | "shopping-cart";
-  overviewVisual?: "streaming-flow";
   /** A code pane that "runs" in step with a screen recording (the Automation Example section). */
   automation?: AutomationExample[];
   /** Small static photos placed beside the overview text. */
@@ -747,7 +746,6 @@ export const projects: Project[] = [
     accent2Text: "#ffffff", // black on this purple is too weak (3.2:1), white is 6.6:1
     heroVisual: "retro-tv",
     heroInline: true,
-    overviewVisual: "streaming-flow",
     overviewPhotos: [{ src: "/images/projects/bigi/banner.jpg", width: 512, height: 250 }],
     resultsVisual: "play-shower",
     results: [
