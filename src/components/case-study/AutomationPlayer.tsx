@@ -219,7 +219,7 @@ export function AutomationPlayer({ examples }: { examples: PreparedExample[] }) 
     <div ref={rootRef} data-open={open} className="mt-6">
       <p className="mb-3 font-mono text-[11px] uppercase leading-relaxed tracking-wide text-foreground/70">
         <span aria-hidden className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle ring-1 ring-foreground" />
-        Automation Example <span className="normal-case tracking-normal text-foreground/50">· real test, names changed</span>
+        Automation Example <span className="normal-case tracking-normal text-foreground/50">· real test, names changed · recorded with a test account</span>
       </p>
 
       <AutoHeight>
