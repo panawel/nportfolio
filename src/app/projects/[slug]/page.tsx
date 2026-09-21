@@ -25,6 +25,7 @@ import { BalloonPhone } from "@/components/case-study/BalloonPhone";
 import { ShoppingCartHero } from "@/components/case-study/ShoppingCartHero";
 import { StreamingOverview } from "@/components/case-study/StreamingOverview";
 import { TestimonialStars } from "@/components/case-study/TestimonialStars";
+import { AutomationExample } from "@/components/case-study/AutomationExample";
 import { ToolTiles } from "@/components/case-study/ToolTiles";
 import { ProjectGallery } from "@/components/case-study/ProjectGallery";
 import { ScrollProgress } from "@/components/case-study/ScrollProgress";
@@ -269,7 +270,16 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <TicketRow className="mt-8 grid gap-4 sm:grid-cols-2">
               {project.scopeSections.map((section, i) => (
                 <Reveal key={section.heading} delay={i * 0.05} className={section.wide ? "sm:col-span-2" : undefined}>
-                  <div className={`shadow-hard-sm h-full rounded-2xl bg-white p-5 ${i % 2 === 0 ? "-rotate-1" : "rotate-1"}`}>
+                  <div
+                    className={`shadow-hard-sm h-full rounded-2xl bg-white p-5 ${
+                      // The automation card is never tilted; while a run is open it lets itself grow past its column on wide screens.
+                      section.automation
+                        ? "transition-[margin] duration-500 motion-reduce:transition-none xl:has-[[data-open=true]]:-mx-32"
+                        : i % 2 === 0
+                          ? "-rotate-1"
+                          : "rotate-1"
+                    }`}
+                  >
                     {section.art && <ScopeArt kind={section.art} tall={section.wide} />}
                     <h3 className="font-semibold text-foreground">{section.heading}</h3>
                     <CheckList
@@ -277,6 +287,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                       lockIndex={section.lockBullet}
                       className="mt-3 space-y-1.5 text-sm text-muted-foreground"
                     />
+                    {section.automation && project.automation && <AutomationExample examples={project.automation} />}
                   </div>
                 </Reveal>
               ))}

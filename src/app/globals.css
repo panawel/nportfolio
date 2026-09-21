@@ -1062,3 +1062,108 @@ body {
     animation: none;
   }
 }
+
+/* Automation Example (Baba Casino): a PyCharm-style code pane that "runs" in step with a recording (see
+   AutomationPlayer). Darcula colours are scoped to .ide; the run accent is the page's lime. Loops sit under
+   TicketRow, so they pause off screen; every animation is listed in the reduced-motion block below. */
+.ide {
+  --ide-bg: #2b2b2b;
+  --ide-bar: #3c3f41;
+  --ide-line: #4b4d4f;
+  --ide-text: #a9b7c6;
+  --ide-dim: #9aa0a6;
+  --ide-num: #7a7d80;
+  background: var(--ide-bg);
+  color: var(--ide-text);
+}
+.tk-kw { color: #cc7832; }
+.tk-str { color: #6a8759; }
+.tk-num { color: #6897bb; }
+.tk-com { color: #909090; font-style: italic; }
+.tk-def { color: #ffc66d; }
+.tk-bi { color: #8888c6; }
+
+/* Long lines are cut with a soft fade at the right edge instead of scrolling sideways. */
+.ide-text {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+}
+
+/* The running line: a flat lime tint with a bar on its left edge. */
+.ide-band {
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  box-shadow: inset 2px 0 0 var(--accent), 0 0 22px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+/* The line that just started running "types itself in" from the left. */
+.ide-line-active .ide-text { animation: ide-type 0.42s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* PASSED: a lime rim and glow around the whole window. */
+.ide-glow {
+  box-shadow: inset 0 0 0 2px var(--accent), inset 0 0 44px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+/* The peek's caret blinks, the Execute buttons breathe, and the run's status dot and waiting chips pulse. */
+.ide-caret { animation: ide-caret 1.05s steps(1) infinite; }
+.ide-breathe { animation: ide-breathe 2.4s ease-out infinite; }
+.ide-dot { animation: ide-dot 1.4s ease-in-out infinite; }
+.ide-wait { animation: ide-wait 1s ease-in-out infinite; }
+.ide-pop { animation: ide-pop 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes ide-type { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes ide-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes ide-breathe {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 9px transparent; }
+}
+@keyframes ide-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+@keyframes ide-wait { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes ide-pop {
+  0% { opacity: 0; transform: scale(0.6); }
+  70% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Closed peeks of the "plus" card: their lines wipe in once (the card's TicketRow keeps them paused until it is on
+   screen). When a run starts, the preview window's address text wipes in too. */
+.ide-wipe { animation: ide-type 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.ide-addr { animation: ide-type 0.6s ease-out 0.25s both; }
+
+/* The Execute button of a closed peek: lifts and glows on hover (hover-capable devices only) and a flat light streak
+   sweeps across it once per hover. */
+.ide-btn { transition: filter 0.2s ease, transform 0.15s ease; }
+.ide-shine { opacity: 0; transform: translateX(-120%) skewX(-20deg); }
+@media (hover: hover) {
+  .ide-btn:hover {
+    transform: translateY(-1px);
+    filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 55%, transparent));
+  }
+  .ide-btn:hover .ide-shine { animation: ide-shine 0.7s ease-out; }
+}
+@keyframes ide-shine {
+  from { opacity: 0.9; transform: translateX(-120%) skewX(-20deg); }
+  to { opacity: 0.9; transform: translateX(420%) skewX(-20deg); }
+}
+
+/* The 2s launching moment: a spinner turns and a flat bar fills (keep the duration in step with LAUNCH_MS in
+   AutomationPlayer.tsx). Without motion the bar simply stays full. */
+.ide-spin { animation: ide-spin 0.9s linear infinite; }
+.ide-launch { animation: ide-launch 2s linear both; }
+@keyframes ide-spin { to { transform: rotate(360deg); } }
+@keyframes ide-launch { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ide-line-active .ide-text,
+  .ide-caret,
+  .ide-breathe,
+  .ide-dot,
+  .ide-wait,
+  .ide-pop,
+  .ide-spin,
+  .ide-launch,
+  .ide-wipe,
+  .ide-addr {
+    animation: none;
+  }
+  .ide-btn:hover { transform: none; }
+  .ide-btn:hover .ide-shine { animation: none; }
+}

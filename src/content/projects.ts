@@ -1,3 +1,5 @@
+import { paymentFlowExamples, type AutomationExample } from "./automation";
+
 export type Stat = {
   value: string;
   label: string;
@@ -65,6 +67,8 @@ export type ScopeSection = {
   lockBullet?: number;
   /** Span both columns of the scope grid (a highlighted card). */
   wide?: boolean;
+  /** Show the project's `automation` example as an expandable drawer inside this card. */
+  automation?: boolean;
 };
 
 /** A gallery item: a muted looping screen recording (an MP4 made from a GIF, with a still as `poster`)
@@ -123,6 +127,8 @@ export type Project = {
   heroInline?: boolean;
   heroVisual?: "voucher-phone" | "slot-machine" | "popcorn" | "crm-phone" | "retro-tv" | "phones-lock" | "balloon-phone" | "shopping-cart";
   overviewVisual?: "streaming-flow";
+  /** A code pane that "runs" in step with a screen recording (the Automation Example section). */
+  automation?: AutomationExample[];
   /** Small static photos placed beside the overview text. */
   overviewPhotos?: StickerPhoto[];
   /** Replaces the site's lime accent (--accent) on this project's page only, e.g. a brand colour. Text on it
@@ -310,6 +316,7 @@ export const projects: Project[] = [
         heading: "The \"plus\" side: self-taught automation",
         art: "shield-stars",
         wide: true,
+        automation: true,
         bullets: [
           "Developed a custom automated smoke and regression suite using Python and Playwright with the Pytest framework",
           "Leveraged AI tools (Gemini, Antigravity) to build small Python utilities that speed up daily manual workflows",
@@ -330,7 +337,6 @@ export const projects: Project[] = [
       { value: "24/7", label: "LiveOps Coverage" },
     ],
     documents: [
-      { label: "Playwright automated regression suite", kind: "repo" },
       { label: "Bug reports (Jira)", kind: "bug-tracker" },
     ],
     galleryCount: 3,
@@ -338,6 +344,7 @@ export const projects: Project[] = [
     accent: "#F246EE", // the pink of the Baba Casino logo
     accent2: "#FCED22", // and its yellow
     heroVisual: "slot-machine",
+    automation: paymentFlowExamples,
     resultsVisual: "coin-shower",
     results: [
       "Reduced manual release-day sanity-check time by self-building a Python + Playwright regression suite.",
