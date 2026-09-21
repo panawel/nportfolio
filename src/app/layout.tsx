@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { Nav } from "@/components/Nav";
 import { MotionProvider } from "@/components/MotionProvider";
+import { RouteMemory } from "@/components/RouteMemory";
 import { profile } from "@/content/profile";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <MotionProvider>
+          <RouteMemory />
           <Nav />
           {children}
         </MotionProvider>

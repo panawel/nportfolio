@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, FileText, Bug, BarChart3, GitBranch, Video, Image as ImageIcon } from "lucide-react";
 import { projects, getProject } from "@/content/projects";
+import { BackToProjects } from "@/components/BackToProjects";
 import { Pill } from "@/components/Pill";
 import { Eyebrow } from "@/components/Eyebrow";
 import { StatCard } from "@/components/StatCard";
@@ -143,12 +143,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             }
           >
           <div>
-          <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 rounded font-mono text-xs uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
+          <BackToProjects className="inline-flex items-center gap-2 rounded font-mono text-xs uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
             <ArrowLeft className="h-3.5 w-3.5" /> All Projects
-          </Link>
+          </BackToProjects>
 
           <Reveal>
             <div className={`mt-6 flex items-center gap-4 ${project.heroInline ? "max-[359px]:gap-3" : ""}`}>
