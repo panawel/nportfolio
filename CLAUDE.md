@@ -38,6 +38,8 @@ There is no test suite and no single-test command. "Done" means `tsc`, `eslint -
 
 **Certificates:** `CertificateCard` per credential + the shared `MediaLightbox` (also used by the case-study gallery; an empty caption hides the caption pill).
 
+**More Projects:** `MoreProjects.tsx` is the sole content of the case-study `<SiteFooter>` (`projects/[slug]/page.tsx`; never on the homepage) - project pages dropped `ContactSection` entirely (`ContactSection` is homepage-only now, no `compact` mode), so the only way to reach out from a project page is the footer's own slim bottom bar (copyright/social icons) right below this block. Picks 5 of the other 7 projects with a plain `Math.random()` shuffle - this file has no `"use client"`, so it runs once per project page at `next build` (SSG), giving each page its own stable pick that only changes on the next deploy; no client JS, no hydration risk. Below `sm` it's a static, no-scroll "icon dock" row (logo only, no name, all 5 picks in one row via `flex-nowrap justify-center` on 48px tiles, alternating tilts like TechStack/ToolTiles); from `sm` it switches to a wrapping mini-card grid (`sm:grid-cols-3 lg:grid-cols-5`, logo + name + tagline), same 5 picks. "View All Projects" is one link placed once, after both grids and right-aligned - whichever grid is hidden takes no space, so it always lands directly under the visible one, on every breakpoint.
+
 ## Gotchas
 
 - `cn()` in `src/lib/cn.ts` is a plain class join (no tailwind-merge): conflicting utilities both apply, so pass variants instead of overriding.

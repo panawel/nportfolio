@@ -33,8 +33,11 @@ export function LogoMarquee() {
                 copy > 0 ? "motion-reduce:hidden" : ""
               }`}
             >
-              <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-white p-1">
-                <Image src={p.logo as string} alt="" aria-hidden width={32} height={32} className="h-full w-full object-contain" />
+              {/* No tile behind the logo (same bare, aspect-true treatment as LogoBadge's tone="none",
+                  not reused here directly since this image stays decorative/aria-hidden - the visible
+                  name text next to it is what a screen reader gets). */}
+              <div className="relative h-8 shrink-0" style={{ width: Math.min(32 * (p.logoAspect ?? 1), 32 * 1.8) }}>
+                <Image src={p.logo as string} alt="" aria-hidden fill sizes="64px" className="object-contain object-left" />
               </div>
               {/* Flat lime highlighter band, same technique as the About headline (no gradient). */}
               <span className="font-mono text-xs uppercase tracking-wide text-foreground/70 transition-[color,box-shadow] duration-200 group-hover/item:text-foreground group-hover/item:shadow-[inset_0_-0.35em_0_var(--accent)]">

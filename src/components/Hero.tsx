@@ -10,7 +10,15 @@ import { Squiggle } from "@/components/Squiggle";
 import { LogoMarquee } from "@/components/LogoMarquee";
 import { HeroStatCards } from "@/components/HeroStatCards";
 
-const roles = ["QA Engineer", "Bug Hunter", "Automation Tinkerer", "Release-Day Sanity Checker", "Pixel Nitpicker"];
+const roles = [
+  "Bug Hunter",
+  "Automation Tinkerer",
+  "Release-Day Sanity Checker",
+  "Pixel Nitpicker",
+  "Edge Case Whisperer",
+  "Flaky Test Wrangler",
+  "Ctrl+Z Enthusiast",
+];
 
 // Progressive blur behind the hero text, so the text stays readable over the busy photo without a
 // hard-edged panel. It is a stack of backdrop-blur layers plus a flat dark tint, each masked so it
@@ -88,8 +96,11 @@ export function Hero() {
             sizes="100vw"
             className="pointer-events-none object-cover object-[88%_center] opacity-[0.22] mix-blend-screen blur-[26px] brightness-[1.35] saturate-[1.15] scale-[1.12] sm:object-[82%_center] lg:object-[74%_center]"
           />
-          {/* Flat scrim (not a gradient) so white text stays legible over a busy photo. */}
-          <div className="absolute inset-0 bg-black/45" />
+          {/* Flat scrim (not a gradient) so white text stays legible over a busy photo. Below `lg` the
+              text sits below the photo, not on top of it (it starts at 72%, where BlurBand's own tint
+              already takes over), so the photo itself only needs a light scrim there; at `lg` the text
+              sits directly on the photo and keeps the full scrim. */}
+          <div className="absolute inset-0 bg-black/20 lg:bg-black/32" />
         </div>
         <BlurBand />
 

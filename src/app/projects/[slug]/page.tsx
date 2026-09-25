@@ -7,8 +7,8 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { StatCard } from "@/components/StatCard";
 import { Reveal } from "@/components/Reveal";
 import { LogoBadge } from "@/components/LogoBadge";
-import { ContactSection } from "@/components/ContactSection";
 import { SiteFooter } from "@/components/SiteFooter";
+import { MoreProjects } from "@/components/MoreProjects";
 import { TicketRow } from "@/components/TicketRow";
 import { VoucherPhone } from "@/components/case-study/VoucherPhone";
 import { ScopeArt } from "@/components/case-study/ScopeArt";
@@ -155,7 +155,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
 
           <Reveal>
             <div className={`mt-6 flex items-center gap-4 ${project.heroInline ? "max-[359px]:gap-3" : ""}`}>
-              <LogoBadge src={project.logo} alt={project.name} size={56} tone="white" />
+              <LogoBadge src={project.logo} alt={project.name} size={56} tone="none" aspect={project.logoAspect} />
               <h1
                 className={`text-4xl font-medium tracking-tight text-foreground sm:text-5xl ${
                   project.heroInline ? "max-[359px]:text-3xl" : ""
@@ -373,7 +373,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       )}
     </main>
     <SiteFooter>
-      <ContactSection compact />
+      <MoreProjects current={project.slug} />
     </SiteFooter>
     </>
   );
