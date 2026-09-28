@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/components/AppLink";
 import { projects } from "@/content/projects";
 
 const logos = projects.filter((p) => p.logo);

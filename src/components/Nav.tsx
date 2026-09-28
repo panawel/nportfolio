@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/components/AppLink";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Award, FolderKanban, Layers, Mail, Menu, User, X, type LucideIcon } from "lucide-react";
 import { SectionLink } from "@/components/SectionLink";

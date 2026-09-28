@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/components/AppLink";
 import { ArrowUpRight } from "lucide-react";
 import { projects, type Project } from "@/content/projects";
 import { LogoBadge } from "@/components/LogoBadge";

@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Nav } from "@/components/Nav";
 import { MotionProvider } from "@/components/MotionProvider";
 import { RouteMemory } from "@/components/RouteMemory";
+import { NavLoadingBar } from "@/components/NavLoadingBar";
 import { profile } from "@/content/profile";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
         <MotionProvider>
+          <NavLoadingBar />
           <RouteMemory />
           <Nav />
           {children}

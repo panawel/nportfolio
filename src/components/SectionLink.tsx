@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/AppLink";
 import { usePathname } from "next/navigation";
 
 /** A link to a homepage section (`/#projects`). Next's own hash navigation does nothing when the address
