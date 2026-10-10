@@ -135,6 +135,8 @@ export function ProjectGallery({
               <Tile
                 key={m.src}
                 media={m}
+                // Three tall tiles in two columns would leave the last one alone: centre it under the pair.
+                className={three && i === 2 ? "max-sm:col-span-2 max-sm:mx-auto max-sm:w-[calc(50%-0.375rem)]" : undefined}
                 onOpen={() => open(i)}
                 buttonRef={(el) => {
                   triggers.current[i] = el;

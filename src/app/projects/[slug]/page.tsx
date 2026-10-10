@@ -14,10 +14,10 @@ import { VoucherPhone } from "@/components/case-study/VoucherPhone";
 import { ScopeArt } from "@/components/case-study/ScopeArt";
 import { CheckList } from "@/components/case-study/CheckList";
 import { DeviceRow } from "@/components/case-study/DeviceRow";
-import { SlotMachine } from "@/components/case-study/SlotMachine";
 import { CoinShower } from "@/components/case-study/CoinShower";
 import { PopcornHero } from "@/components/case-study/PopcornHero";
 import { PhotoStickers } from "@/components/case-study/PhotoStickers";
+import { ProductShowcase } from "@/components/case-study/ProductShowcase";
 import { CrmPhone } from "@/components/case-study/CrmPhone";
 import { RetroTv } from "@/components/case-study/RetroTv";
 import { SecurePhones } from "@/components/case-study/SecurePhones";
@@ -175,16 +175,28 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <Reveal delay={0.05}>
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{project.tagline}</p>
           </Reveal>
-          <Reveal delay={0.1}>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <Pill key={tag} tone="white">{tag}</Pill>
-              ))}
-            </div>
-          </Reveal>
+          {!project.hideHeaderTags && (
+            <Reveal delay={0.1}>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <Pill key={tag} tone="white">{tag}</Pill>
+                ))}
+              </div>
+            </Reveal>
+          )}
+          {/* With a showcase the picture sits between the tagline and the context card, at full width. */}
+          {project.heroShowcase && (
+            <Reveal delay={0.1} className="mt-10">
+              <ProductShowcase showcase={project.heroShowcase} priority />
+            </Reveal>
+          )}
           {project.context && (
             <Reveal delay={0.15}>
-              <p className="shadow-hard-sm mt-6 -rotate-1 rounded-2xl bg-white p-5 font-mono text-sm text-foreground/80">
+              <p
+                className={`shadow-hard-sm mt-6 -rotate-1 rounded-2xl bg-white p-5 font-mono text-sm text-foreground/80 ${
+                  project.heroShowcase ? "max-w-2xl" : ""
+                }`}
+              >
                 {project.context}
               </p>
             </Reveal>
@@ -193,7 +205,6 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           {project.heroVisual && (
             <div className={project.heroInline ? "hidden lg:block" : "mt-14 lg:mt-0 lg:pr-9"}>
               {project.heroVisual === "voucher-phone" && <VoucherPhone />}
-              {project.heroVisual === "slot-machine" && <SlotMachine />}
               {project.heroVisual === "popcorn" && <PopcornHero scale={project.heroInline ? 0.7 : 1} />}
               {project.heroVisual === "crm-phone" && <CrmPhone />}
               {project.heroVisual === "retro-tv" && <RetroTv scale={project.heroInline ? 0.7 : 1} className="mx-auto" />}

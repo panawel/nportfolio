@@ -89,6 +89,14 @@ export type GalleryMedia = {
 /** A small decorative photo shown beside the overview text (static: not clickable, no viewer). */
 export type StickerPhoto = { src: string; width: number; height: number };
 
+/** A real screenshot of the product for the page header: `desktop` sits in a drawn browser window and `popout`
+ *  (a drawn, animated element - the slot machine, scaled down) floats over its bottom-right corner. `alt` is the
+ *  screenshot's description for assistive tech only (nothing visible is added). */
+export type HeroShowcase = {
+  desktop: StickerPhoto & { alt: string };
+  popout: "slot-machine";
+};
+
 export type Testimonial = {
   quote: string;
   author: string;
@@ -125,11 +133,16 @@ export type Project = {
   /** Optional story pictures for this project's page (pictures only; they add no text). */
   /** Show the hero picture small: beside the title on phones (and a smaller column from `lg`). Popcorn and retro TV only. */
   heroInline?: boolean;
-  heroVisual?: "voucher-phone" | "slot-machine" | "popcorn" | "crm-phone" | "retro-tv" | "phones-lock" | "balloon-phone" | "shopping-cart";
+  heroVisual?: "voucher-phone" | "popcorn" | "crm-phone" | "retro-tv" | "phones-lock" | "balloon-phone" | "shopping-cart";
   /** A code pane that "runs" in step with a screen recording (the Automation Example section). */
   automation?: AutomationExample[];
   /** Small static photos placed beside the overview text. */
   overviewPhotos?: StickerPhoto[];
+  /** The page header's picture, instead of `heroVisual`: a real screenshot in a browser window with an animated
+   *  element floating over it, stacked under the title text at full width. */
+  heroShowcase?: HeroShowcase;
+  /** Don't show the tags under the title on this project's page (they still show on the homepage cards). */
+  hideHeaderTags?: boolean;
   /** Replaces the site's lime accent (--accent) on this project's page only, e.g. a brand colour. Text on it
    *  stays black, so pick a colour that black is readable on. */
   accent?: string;
@@ -335,14 +348,22 @@ export const projects: Project[] = [
       { value: "50+", label: "Automated Regression Tests" },
       { value: "24/7", label: "LiveOps Coverage" },
     ],
-    documents: [
-      { label: "Bug reports (Jira)", kind: "bug-tracker" },
-    ],
+    documents: [],
     galleryCount: 3,
-    gallery: [{ src: "/images/projects/baba-casino/slot-phone.webp", width: 812, height: 750, kind: "image" }],
+    // Real screens of the product (lobby, a promo pop-up, the coin store), cropped to the app itself - the
+    // phone's status bar, URL bar and browser toolbar are cut off. Originals in assets/originals/.
+    gallery: [
+      { src: "/images/projects/baba-casino/phone-lobby.webp", width: 700, height: 1173, kind: "image", fit: "cover" },
+      { src: "/images/projects/baba-casino/phone-boost.webp", width: 700, height: 1173, kind: "image", fit: "cover" },
+      { src: "/images/projects/baba-casino/phone-store.webp", width: 700, height: 1173, kind: "image", fit: "cover" },
+    ],
+    hideHeaderTags: true,
+    heroShowcase: {
+      desktop: { src: "/images/projects/baba-casino/desktop-lobby.webp", width: 1800, height: 888, alt: "The Baba Casino lobby on desktop" },
+      popout: "slot-machine",
+    },
     accent: "#F246EE", // the pink of the Baba Casino logo
     accent2: "#FCED22", // and its yellow
-    heroVisual: "slot-machine",
     automation: paymentFlowExamples,
     resultsVisual: "coin-shower",
     results: [
