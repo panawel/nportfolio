@@ -1160,3 +1160,12 @@ body {
   .ide-btn:hover { transform: none; }
   .ide-btn:hover .ide-shine { animation: none; }
 }
+
+/* A folded foldable iPhone shows two screens side by side: pull the nav (and its menu sheet) into the right-hand
+   one, clear of the hinge. Only matches where the Viewport Segments API reports two segments, and the nav only
+   asks for it when it has detected a foldable iPhone (`data-foldable`), so every other device ignores this. */
+@media (horizontal-viewport-segments: 2) {
+  .nav-shell[data-foldable="true"] {
+    left: calc(env(viewport-segment-left 1 0, 0px) + var(--frame));
+  }
+}

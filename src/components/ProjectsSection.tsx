@@ -13,7 +13,7 @@ export function ProjectsSection() {
         {/* No visible headline (the cards speak for themselves), but keep the heading for screen readers. */}
         <h2 className="sr-only">Projects</h2>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        <div className="mt-10 grid gap-6 min-[860px]:grid-cols-2">
           {featuredProjects.map((project, i) => (
             <FeaturedProjectCard key={project.slug} project={project} delay={i * 0.1} />
           ))}
